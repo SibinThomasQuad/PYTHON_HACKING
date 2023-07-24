@@ -1,6 +1,9 @@
 from browser_history import get_history
 import subprocess
 import wmi
+import hashlib
+import os
+import exifread
 
 class Save:
     def extracted_data(self,history,file_name):
@@ -12,6 +15,26 @@ class Data:
         save_obj = Save()
         self.save = save_obj
     
+    def get_files_in_subfolders(self,drive_path):
+        file_list = []
+        for root, _, files in os.walk(drive_path):
+            for file_name in files:
+                file_path = os.path.join(root, file_name)
+                file_list.append(file_path)
+
+        return file_list
+    
+    def get_files(self):
+        drive_path = input("Enter the drive path (e.g., C:/ or D:/): ")
+        if not os.path.exists(drive_path):
+            print("Drive not found.")
+        else:
+            all_files = self.get_files_in_subfolders(drive_path)
+
+            print("All files in subfolders:")
+            for file_path in all_files:
+                self.save.extracted_data(file_path,"file_structure.dump")
+            
     def running_applications(self):
         f = wmi.WMI()
         self.save.extracted_data("pid   Process name","running_apps.dump")
@@ -40,11 +63,40 @@ class Data:
             print("[+] browser history dumping success!")
         except:
             print("[-] browser history dumping failed")
+    
+    def calculate_md5(self,file_path=0):
+        if file_path == 0:
+            file_path = input("Input file path > ")
+        md5_hash = hashlib.md5()
+        with open(file_path, "rb") as file:
+            # Read the file in chunks to handle large files efficiently
+            for chunk in iter(lambda: file.read(4096), b""):
+                md5_hash.update(chunk)
+        hash_value = md5_hash.hexdigest()
+        print("[+] file "+file_path)
+        print("[+] MD5 Hash : "+hash_value)
+    
+    def calculate_sha1(self,file_path=0):
+        if file_path == 0:
+            file_path = input("Input file path > ")
+        sha1_hash = hashlib.sha1()
+        with open(file_path, "rb") as file:
+            for chunk in iter(lambda: file.read(4096), b""):
+                sha1_hash.update(chunk)
+        hash_value = sha1_hash.hexdigest()
+        print("[+] file "+file_path)
+        print("[+] SHA1 Hash : "+hash_value)
+    
+    def extract_metadata(self):
+        file_path = input("Enter file path > ")
+        with open(file_path, "rb") as file:
+            tags = exifread.process_file(file)
+        return tags
 
-class Menu:
+class Menu: 
     def data(self):
-        menu_functions = ["browser_history","installed_apps","running_applications"]
-        menu_labels = ["browser history","Installed Apps","Running Apps"]
+        menu_functions = ["browser_history","installed_apps","running_applications","calculate_md5","calculate_sha1","get_files","extract_metadata"]
+        menu_labels = ["browser history","Installed Apps","Running Apps","MD5 Hash File","SHA1 Hash File","Get file structure","Meta data"]
         menu_info = {"functions":menu_functions,"lables_name":menu_labels}
         return menu_info
 
