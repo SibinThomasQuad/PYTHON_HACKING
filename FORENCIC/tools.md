@@ -33,6 +33,14 @@ Below is a list of cyber forensic tools that are commonly used for different asp
    - Usages: Memory forensics for analyzing running processes, network connections, and malware.
    - Advantages: Specialized in memory analysis, supports multiple operating systems, and can uncover hidden information.
 
+5. **ExifTool**
+   - Usages: Extracts metadata from files including images, documents, and audio files.
+   - Advantages: Supports a wide range of file formats, provides detailed metadata information, and can be scripted for batch processing.
+
+6. **Forensic Image Viewer (FIV)**
+   - Usages: View and extract metadata from disk images.
+   - Advantages: Provides quick access to metadata in disk images, supports various image formats.
+
 ... (Add more tools with usages and advantages)
 
 ## Contributing
