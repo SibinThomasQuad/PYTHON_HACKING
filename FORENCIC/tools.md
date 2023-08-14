@@ -41,6 +41,14 @@ Below is a list of cyber forensic tools that are commonly used for different asp
    - Usages: View and extract metadata from disk images.
    - Advantages: Provides quick access to metadata in disk images, supports various image formats.
 
+7. **Magnet RAM Capture**
+   - Usages: Capture RAM content for further analysis in digital investigations.
+   - Advantages: Open-source tool for capturing live memory, supports multiple platforms, and can be scripted for automation.
+
+8. **LiME (Linux Memory Extractor)**
+   - Usages: Capture memory from Linux systems for analysis.
+   - Advantages: Open-source memory extraction tool for Linux, supports multiple kernel versions.
+
 ... (Add more tools with usages and advantages)
 
 ## Contributing
