@@ -167,6 +167,6 @@ def extract_all_details(url, domain_name):
 
 if __name__ == "__main__":
     website_url = "https://www.example.com"  # Replace with the desired website URL
-    domain_name = "infocomsoft.com"  # Replace with the domain name of the website
+    domain_name = "example.com"  # Replace with the domain name of the website
 
     extract_all_details(website_url, domain_name)
